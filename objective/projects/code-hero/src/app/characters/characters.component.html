@@ -9,8 +9,8 @@
       </p>
       <input
         matInput
+        [formControl]="characterName"
         id="characterName"
-        #characterName
         class="search-field"
         type="text"
         name="search-field"
@@ -36,19 +36,17 @@
       <div class="character-box">
         <mat-list-item
           class="character-card"
-          *ngFor="let i of [1, 2, 3, 4, 5, 6, 7, 8, 9]"
+          *ngFor="let character of characterList; let i = index"
         >
           <div fxLayout="column" class="character-image">
-            <img src="assets/image/photo.png" class="image" />
+            <img [src]="imageList[i]" class="image" />
           </div>
           <div fxLayout="column" class="character-name">
-            <h3 matLine>Abner Jenkins</h3>
+            <h3 matLine>{{ character.name }}</h3>
           </div>
           <div fxLayout="column" class="character-desc" fxHide fxShow.gt-sm>
             <span>
-              Lorem Ipsum is simply dummy text of the printing and typesetting
-              industry. Lorem Ipsum has been the industry's standard dummy text
-              ever since the 1500s, when an unknown printer took a galley of ...
+              {{ character.description }}
             </span>
           </div>
         </mat-list-item>
