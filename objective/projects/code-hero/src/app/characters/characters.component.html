@@ -1,0 +1,72 @@
+<div id="characters">
+  <div class="search-box">
+    <p class="search-text">
+      Busca de personagens
+    </p>
+    <div class="search-name">
+      <p class="character-name">
+        Nome do personagem
+      </p>
+      <input
+        matInput
+        id="characterName"
+        #characterName
+        class="search-field"
+        type="text"
+        name="search-field"
+        placeholder="Pesquisar"
+      />
+    </div>
+  </div>
+  <br />
+  <div class="character-list">
+    <mat-list style="overflow: auto; padding: 0;">
+      <div fxLayout="row" class="character-header">
+        <p matSubheader>Personagem</p>
+      </div>
+
+      <!-- <div fxLayout="row" class="character-header">
+        <div fxLayout="column">
+          <p>Personagem</p>
+        </div>
+        <div fxLayout="column">
+          <p>Descrição</p>
+        </div>
+      </div> -->
+      <div class="character-box">
+        <mat-list-item
+          class="character-card"
+          *ngFor="let i of [1, 2, 3, 4, 5, 6, 7, 8, 9]"
+        >
+          <div fxLayout="column" class="character-image">
+            <img src="assets/image/photo.png" class="image" />
+          </div>
+          <div fxLayout="column" class="character-name">
+            <h3 matLine>Abner Jenkins</h3>
+          </div>
+          <div fxLayout="column" class="character-desc" fxHide fxShow.gt-sm>
+            <span>
+              Lorem Ipsum is simply dummy text of the printing and typesetting
+              industry. Lorem Ipsum has been the industry's standard dummy text
+              ever since the 1500s, when an unknown printer took a galley of ...
+            </span>
+          </div>
+        </mat-list-item>
+      </div>
+    </mat-list>
+  </div>
+</div>
+
+<footer class="characters-footer">
+  <div class="page-navigation" fxLayout="row">
+    <!-- <button><<</button>
+    <button><</button> -->
+    <button class="page-button">1</button>
+    <button class="page-button">2</button>
+    <button class="page-button">3</button>
+    <button class="page-button">4</button>
+    <button class="page-button">5</button>
+    <!-- <button>></button>
+    <button>>></button> -->
+  </div>
+</footer>
