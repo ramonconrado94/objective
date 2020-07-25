@@ -1,0 +1,59 @@
+#header {
+  .spacer {
+    flex: 1 1 auto;
+  }
+  .bg {
+    background: #ffffff 0% 0% no-repeat padding-box;
+    opacity: 1;
+    width: 1366px;
+    margin-left: 0px;
+    margin-top: 0px;
+    padding: 0px;
+  }
+
+  .logo {
+    // margin: 21px, 0, 0, 24px;
+    padding-bottom: 0px;
+    padding-right: 0px;
+    padding-top: 21px;
+    padding-left: 24px;
+    width: 96px;
+    height: 24px;
+    /* UI Properties */
+    //   background: transparent url("../../../assets/img/objective-logo.png") 0%
+    //     0% no-repeat padding-box;
+    opacity: 1;
+  }
+
+  .author {
+    top: 16px;
+    left: 1027px;
+    width: 315px;
+    height: 32px;
+    /* UI Properties */
+    opacity: 1;
+    .name {
+      top: 0px;
+      left: 0px;
+      width: 137px;
+      height: 17px;
+      /* UI Properties */
+      text-align: left;
+      font: Bold 14px/20px PT Sans Caption;
+      letter-spacing: 0px;
+      color: #555555;
+    }
+
+    .title {
+      top: 0px;
+      left: 0px;
+      width: 137px;
+      height: 17px;
+      /* UI Properties */
+      text-align: left;
+      font: Normal 14px/20px PT Sans Caption;
+      letter-spacing: 0px;
+      color: #555555;
+    }
+  }
+}
