@@ -20,38 +20,40 @@
   </div>
 
   <div class="character-list">
-    <div fxLayout="row" class="character-header">
-      <p>
+    <div fxLayout="row" fxShow fxHide.lt-sm >
+      <span style="width: 370px;">
         Personagem
-      </p>
-      <p>
+      </span>
+      <span style="width: 66%;">
         Descrição
-      </p>
+      </span>
     </div>
-    <mat-list style="overflow: auto; padding: 0;">
-      <div class="character-box">
-        <mat-list-item
-          class="character-card"
-          *ngFor="let character of characterList; let i = index"
-        >
-          <div fxLayout="column" class="character-image">
-            <img [src]="imageList[i]" class="image" />
-          </div>
-          <div fxLayout="column" class="character-name">
-            <h3 matLine>{{ character.name }}</h3>
-          </div>
-          <div fxLayout="column" class="character-desc" fxShow fxHide.lt-sm>
-            <p>
-              {{ character.description }}
-            </p>
-          </div>
-        </mat-list-item>
-      </div>
+
+    <br fxHide fxShow.lt-sm >
+
+    <mat-list class="character-box">
+      <mat-list-item
+        class="character-card"
+        *ngFor="let character of characterList; let i = index"
+        (click)="getDetails(character.id)"
+      >
+        <div fxLayout="column" class="character-image">
+          <img [src]="imageList[i]" class="image" />
+        </div>
+        <div fxLayout="column" class="character-name">
+          <h3 matLine>{{ character.name }}</h3>
+        </div>
+        <div fxLayout="column" class="character-desc" fxShow fxHide.lt-sm>
+          <p>
+            {{ character.description }}
+          </p>
+        </div>
+      </mat-list-item>
     </mat-list>
   </div>
 </div>
 
-<div class="characters-footer">
+<footer class="characters-footer">
   <div class="page-navigation" fxLayoutAlign="center">
     <div class="navigation-arrow">
       <button
@@ -84,13 +86,23 @@
     </div>
 
     <div fxHide fxShow.lt-sm>
-      <button *ngIf="currentPage - 1 > 0" mat-button class="page-button" (click)="selectPage(1)">
+      <button
+        *ngIf="currentPage - 1 > 0"
+        mat-button
+        class="page-button"
+        (click)="selectPage(1)"
+      >
         1
       </button>
       <button mat-button class="page-button selected-page">
         {{ currentPage }}
       </button>
-      <button *ngIf="currentPage != totalPages"  mat-button class="page-button" (click)="selectPage(totalPages)">
+      <button
+        *ngIf="currentPage != totalPages"
+        mat-button
+        class="page-button"
+        (click)="selectPage(totalPages)"
+      >
         {{ totalPages }}
       </button>
     </div>
@@ -114,4 +126,4 @@
       </button>
     </div>
   </div>
-</div>
+</footer>

@@ -12,7 +12,7 @@
 // (imported above). For each palette, you can optionally specify a default, lighter, and darker
 // hue. Available color palettes: https://material.io/design/color/
 $code-hero-primary: mat-palette($mat-indigo);
-$code-hero-accent: mat-palette($mat-pink, A200, A100, A400);
+$code-hero-accent: mat-palette($mat-orange);
 
 // The warn palette is optional (defaults to red).
 $code-hero-warn: mat-palette($mat-red);
@@ -42,9 +42,8 @@ body {
 }
 body {
   margin: 0;
-  // font-family: Roboto, 'Helvetica Neue', sans-serif;
+  background: #e5e5e5;
   font-family: 'PT Sans', sans-serif;
-
 }
 
 * ::-webkit-scrollbar {
@@ -53,8 +52,8 @@ body {
 
 // removendo css padrão dos componentes
 .mat-toolbar-single-row {
-  padding: 0px !important
+  padding: 0px !important;
 }
 .mat-list-base .mat-list-item .mat-list-item-content {
-  padding: 0px !important
+  padding: 0px !important;
 }
