@@ -1,12 +1,12 @@
 <div id="characters">
   <div class="search-box">
-    <p class="search-text">
+    <span class="search-text">
       Busca de personagens
-    </p>
+    </span>
     <div class="search-name">
-      <p class="character-name">
+      <span class="character-name">
         Nome do personagem
-      </p>
+      </span>
       <input
         matInput
         [formControl]="characterName"
@@ -18,21 +18,17 @@
       />
     </div>
   </div>
-  <br />
-  <div class="character-list">
-    <mat-list style="overflow: auto; padding: 0;">
-      <div fxLayout="row" class="character-header">
-        <p matSubheader>Personagem</p>
-      </div>
 
-      <!-- <div fxLayout="row" class="character-header">
-        <div fxLayout="column">
-          <p>Personagem</p>
-        </div>
-        <div fxLayout="column">
-          <p>Descrição</p>
-        </div>
-      </div> -->
+  <div class="character-list">
+    <div fxLayout="row" class="character-header">
+      <p>
+        Personagem
+      </p>
+      <p>
+        Descrição
+      </p>
+    </div>
+    <mat-list style="overflow: auto; padding: 0;">
       <div class="character-box">
         <mat-list-item
           class="character-card"
@@ -44,10 +40,10 @@
           <div fxLayout="column" class="character-name">
             <h3 matLine>{{ character.name }}</h3>
           </div>
-          <div fxLayout="column" class="character-desc" fxHide fxShow.gt-sm>
-            <span>
+          <div fxLayout="column" class="character-desc" fxShow fxHide.lt-sm>
+            <p>
               {{ character.description }}
-            </span>
+            </p>
           </div>
         </mat-list-item>
       </div>
@@ -55,16 +51,67 @@
   </div>
 </div>
 
-<footer class="characters-footer">
-  <div class="page-navigation" fxLayout="row">
-    <!-- <button><<</button>
-    <button><</button> -->
-    <button class="page-button">1</button>
-    <button class="page-button">2</button>
-    <button class="page-button">3</button>
-    <button class="page-button">4</button>
-    <button class="page-button">5</button>
-    <!-- <button>></button>
-    <button>>></button> -->
+<div class="characters-footer">
+  <div class="page-navigation" fxLayoutAlign="center">
+    <div class="navigation-arrow">
+      <button
+        mat-button
+        *ngIf="currentPage > 2"
+        (click)="selectPage(1)"
+        fxShow
+        fxHide.lt-sm
+      >
+        <<
+      </button>
+      <button
+        mat-button
+        *ngIf="currentPage > 1"
+        (click)="selectPage(currentPage - 1)"
+      >
+        <
+      </button>
+    </div>
+    <div *ngFor="let page of pages" fxShow fxHide.lt-sm>
+      <button
+        mat-button
+        *ngIf="page > 0 && page <= totalPages"
+        (click)="selectPage(page)"
+        class="page-button"
+        [ngClass]="{ 'selected-page': page == currentPage }"
+      >
+        {{ page }}
+      </button>
+    </div>
+
+    <div fxHide fxShow.lt-sm>
+      <button *ngIf="currentPage - 1 > 0" mat-button class="page-button" (click)="selectPage(1)">
+        1
+      </button>
+      <button mat-button class="page-button selected-page">
+        {{ currentPage }}
+      </button>
+      <button *ngIf="currentPage != totalPages"  mat-button class="page-button" (click)="selectPage(totalPages)">
+        {{ totalPages }}
+      </button>
+    </div>
+
+    <div class="navigation-arrow">
+      <button
+        mat-button
+        (click)="selectPage(currentPage + 1)"
+        *ngIf="currentPage < totalPages"
+      >
+        >
+      </button>
+      <button
+        mat-button
+        (click)="selectPage(totalPages)"
+        *ngIf="currentPage < totalPages - 1"
+        fxShow
+        fxHide.lt-sm
+      >
+        >>
+      </button>
+    </div>
   </div>
-</footer>
+</div>

@@ -2,11 +2,10 @@ import { NgModule } from '@angular/core';
 import { CharactersRoutingModule } from './characters-routing.module';
 import { CharactersComponent } from './characters.component';
 import { SharedModule } from './../shared/shared.module';
-import { MatListModule } from '@angular/material/list'
-import { MatGridListModule } from '@angular/material/grid-list';
 import { CharacterService } from '../../../services/character.service'
 import { ImageService } from '../../../services/image.service'
-import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 
 @NgModule({
@@ -14,11 +13,8 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
   imports: [
     SharedModule,
     CharactersRoutingModule,
-    MatListModule,
-    MatGridListModule,
-    FormsModule,
-    ReactiveFormsModule
-
+    MatButtonModule,
+    FlexLayoutModule,
   ],
   providers: [
     CharacterService,
