@@ -1,7 +1,7 @@
 #characters {
   left: 0px;
   // width: 1366px;
-  height: 80vh;
+  height: 82vh;
   /* UI Properties */
   background: #e5e5e5 0% 0% no-repeat padding-box;
   opacity: 1;
@@ -28,7 +28,6 @@
       width: 18vw;
       height: 19px;
       margin-top: 16px;
-      /* UI Properties */
       opacity: 1;
     }
 
@@ -63,31 +62,38 @@
 
   .character-header {
     margin-left: 26px;
+    margin-bottom: 8px;
   }
   .character-list {
     margin-left: 10%;
     margin-right: 10%;
+    margin-top: 63px;
+
+    // padding-top: 28%;
   }
   .character-card {
     height: 88px;
     width: 100%;
     margin-bottom: 8px;
 
-    /* UI Properties */
     background: #ffffff 0% 0% no-repeat padding-box;
     box-shadow: 0px 0px 5px #00000033;
     border-radius: 4px;
     opacity: 1;
   }
+  
   .character-box {
     height: 45vh;
+    overflow: auto;
+     padding: 4px;
   }
+
   .character-image {
     margin: 20px 24px 20px 24px;
   }
   .character-name {
     margin: 20px 24px 20px 0;
-    width: 330px
+    width: 330px;
   }
 
   .character-desc {
@@ -104,13 +110,18 @@
     height: 48px !important;
     border-radius: none !important;
   }
+  mat-list-item:hover{
+  box-shadow: 0 0 5px black;
+  // border-radius: 4px;
+  }
 }
 
 .characters-footer {
   height: 90px;
+  min-height: 90px!important;
+  bottom: 0;
   border: 1px solid #e5e5e5;
   width: 100%;
-
   .page-navigation {
     width: 500px;
     height: 32px;
@@ -127,7 +138,7 @@
     height: 32px !important;
     margin-left: 16px;
     margin-top: 26px;
-    padding: 0px
+    padding: 0px;
   }
   .navigation-arrow .mat-button {
     min-width: 40px !important;

@@ -9,32 +9,29 @@
     margin-left: 0px;
     margin-top: 0px;
     padding: 0px;
+    height: 64px;
   }
 
   .logo {
     margin: 21px 0 19px 24px;
     width: 96px;
     height: 24px;
-    /* UI Properties */
-    //   background: transparent url("../../../assets/img/objective-logo.png") 0%
-    //     0% no-repeat padding-box;
     opacity: 1;
   }
 
   .author {
-    top: 16px;
+    top: 24px;
+    bottom: 24px;
     left: 1027px;
-    width: 315px;
-    height: 32px;
-    /* UI Properties */
+    height: 17px;
     opacity: 1;
+    right: 16px;
     .name {
       top: 0px;
       left: 0px;
-      width: 137px;
       height: 17px;
-      /* UI Properties */
       text-align: left;
+      margin-right: 8px;
       font: Bold 14px/20px PT Sans Caption;
       letter-spacing: 0px;
       color: #555555;
@@ -45,11 +42,18 @@
       left: 0px;
       width: 137px;
       height: 17px;
-      /* UI Properties */
       text-align: left;
       font: Normal 14px/20px PT Sans Caption;
       letter-spacing: 0px;
+      margin-right:16px;
       color: #555555;
     }
   }
+    .mat-button {
+      width: 32px;
+      min-width: 32px !important;
+      height: 32px;
+      margin:16px 24px 16px 0;
+      padding: 0px
+    }
 }

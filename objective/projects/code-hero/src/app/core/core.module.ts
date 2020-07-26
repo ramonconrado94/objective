@@ -3,7 +3,9 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MainComponent } from './layout/main/main.component';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatButtonModule } from '@angular/material/button';
 import { RouterModule } from '@angular/router';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 
 @NgModule({
@@ -12,7 +14,9 @@ import { RouterModule } from '@angular/router';
     BrowserModule,
     BrowserAnimationsModule,
     RouterModule,
-    MatToolbarModule
+    MatToolbarModule,
+    MatButtonModule,
+    FlexLayoutModule
   ],
   exports: [MainComponent]
 })

@@ -45,24 +45,6 @@ export class CharacterService {
         catchError(this.handleError))
   }
 
-  // findCharacterByName(name: string): Observable<MarvelResponse> {
-  //   const timestamp = new Date().getTime().toString();
-  //   const hash = md5(timestamp + this.private_key + this.public_key)
-  //   const options = {
-  //     params: new HttpParams({
-  //       fromObject: {
-  //         apikey: this.public_key,
-  //         ts: timestamp,
-  //         hash: hash,
-  //         name: name
-  //       }
-  //     })
-  //   };
-  //   return this.httpClient.get<MarvelResponse>(this.marvel_api, options)
-  //     .pipe(
-  //       retry(2),
-  //       catchError(this.handleError))
-  // }
 
   // Manipulação de erros
   handleError(error: HttpErrorResponse) {
