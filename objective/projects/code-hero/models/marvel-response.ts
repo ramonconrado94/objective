@@ -3,7 +3,7 @@ export interface MarvelResponse {
   etag: string,
   data: {
     count: number,
-    limit: string,
+    limit: number,
     offset: number,
     results: {
       id: number,
