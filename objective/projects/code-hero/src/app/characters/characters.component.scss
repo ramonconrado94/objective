@@ -7,14 +7,16 @@
   opacity: 1;
 
   .search-box {
-    padding-top: 44px;
-    padding-left: 113px;
-    width: 648px;
+    padding-top: 40px;
+    margin-left: 10%;
+    width: 47vw;
     height: 111px;
     /* UI Properties */
     opacity: 1;
+
     .search-text {
       text-align: left;
+      height: 36px;
       font: Bold 32px/30px PT Sans Caption;
       letter-spacing: 0px;
       color: #555555;
@@ -23,8 +25,9 @@
     .search-name {
       top: 156px;
       left: 113px;
-      width: 295px;
-      height: 59px;
+      width: 18vw;
+      height: 19px;
+      margin-top: 16px;
       /* UI Properties */
       opacity: 1;
     }
@@ -32,7 +35,7 @@
     .search-field {
       top: 183px;
       left: 113px;
-      width: 295px;
+      width: 276px;
       height: 32px;
       /* UI Properties */
       background: #ffffff 0% 0% no-repeat padding-box;
@@ -58,6 +61,9 @@
     }
   }
 
+  .character-header {
+    margin-left: 26px;
+  }
   .character-list {
     margin-left: 10%;
     margin-right: 10%;
@@ -74,20 +80,24 @@
     opacity: 1;
   }
   .character-box {
-    // height: 46vh;
-    height: 49vh;
+    height: 45vh;
   }
   .character-image {
     margin: 20px 24px 20px 24px;
   }
   .character-name {
     margin: 20px 24px 20px 0;
+    width: 330px
   }
 
   .character-desc {
     margin: 20px 24px 20px 24px;
-    font: Normal 12px/20px PT Sans Caption;
+    width: 100%;
     white-space: normal;
+    overflow: auto;
+    font: Normal 12px/20px PT Sans Caption;
+    text-overflow: ellipsis;
+    height: 70px;
   }
   .image {
     width: 48px !important;
@@ -95,45 +105,42 @@
     border-radius: none !important;
   }
 }
+
 .characters-footer {
   height: 90px;
   border: 1px solid #e5e5e5;
   width: 100%;
-  display: block;
 
   .page-navigation {
-    width: 280px;
+    width: 500px;
     height: 32px;
     margin: auto;
+    display: flex;
     //  margin-left: 36vw;
-    :first-child {
-      // margin-left: 36vw;
-    }
-    :last-child {
-      // margin-right: 36vw;
-    }
   }
-  .page-button {
-    margin-right: 16px;
-    margin-bottom: 32px;
-    margin-top: 26px;
-    width: 40px;
-    height: 32px;
 
+  .page-button {
     background: #f5f5f5 0% 0% no-repeat padding-box;
     border: 1px solid #e5e5e5;
+    min-width: 40px !important;
+    width: 40px !important;
+    height: 32px !important;
+    margin-left: 16px;
+    margin-top: 26px;
+    padding: 0px
   }
-  .navigation-arrow {
-    width: 6px;
-    height: 10px;
-    /* UI Properties */
+  .navigation-arrow .mat-button {
+    min-width: 40px !important;
+    width: 40px !important;
+    height: 32px !important;
+    margin-top: 26px;
     opacity: 1;
   }
   .page-button:hover {
     background: #6bc2fc 0% 0% no-repeat padding-box !important;
   }
 
-  .page-button:active {
+  .selected-page {
     background: #167abc 0% 0% no-repeat padding-box !important;
   }
 }
