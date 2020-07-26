@@ -20,11 +20,8 @@ export class CharacterService {
     private httpClient: HttpClient,
   ) { }
 
-  httpOptions = {
-    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
-  }
-
-  getCharacters(page: Page): Observable<CharacterResponse> {
+  getCharacters(page?: Page | null, id?: string): Observable<CharacterResponse> {
+    console.log("CharacterService -> page", page)
     const timestamp = new Date().getTime().toString();
     const hash = md5(timestamp + this.private_key + this.public_key)
     const options = {
@@ -33,42 +30,25 @@ export class CharacterService {
           apikey: this.public_key,
           ts: timestamp,
           hash: hash,
-          offset: page.offset.toString(),
-          limit: page.limit.toString()
+          offset: page ? page.offset.toString() : '0',
+          limit: page ? page.limit.toString() : '1'
         }
       })
     };
-    if (page.argument) {
+    if (page && page.argument) {
       options.params = options.params.append("nameStartsWith", page.argument)
-
     }
-    return this.httpClient.get<CharacterResponse>(this.marvel_api, options)
+    const path = id ? this.marvel_api + `/${id}` : this.marvel_api;
+
+    return this.httpClient.get<CharacterResponse>(path, options)
       .pipe(
         retry(2),
         catchError(this.handleError))
   }
-
-  getCharacterByid(id: string): Observable<CharacterResponse> {
-    const timestamp = new Date().getTime().toString();
-    const hash = md5(timestamp + this.private_key + this.public_key)
-    const options = {
-      params: new HttpParams({
-        fromObject: {
-          apikey: this.public_key,
-          ts: timestamp,
-          hash: hash,
-          offset: '0',
-          limit: '1'
-        }
-      })
-    };
-    return this.httpClient.get<CharacterResponse>(`${this.marvel_api}/${id}`, options)
-      .pipe(
-        retry(2),
-        catchError(this.handleError))
-  }
-
+  
   getDetailsByCharacterIdAndContext(id: string, context: string): Observable<DetailResponse> {
+    console.log("CharacterService -> context", context)
+    console.log("CharacterService -> id", id)
     const timestamp = new Date().getTime().toString();
     const hash = md5(timestamp + this.private_key + this.public_key)
     const options = {

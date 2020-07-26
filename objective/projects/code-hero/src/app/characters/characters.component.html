@@ -20,7 +20,7 @@
   </div>
 
   <div class="character-list">
-    <div fxLayout="row" fxShow fxHide.lt-sm >
+    <div fxLayout="row" fxShow fxHide.lt-sm>
       <span style="width: 370px;">
         Personagem
       </span>
@@ -29,13 +29,13 @@
       </span>
     </div>
 
-    <br fxHide fxShow.lt-sm >
+    <br fxHide fxShow.lt-sm />
 
     <mat-list class="character-box">
       <mat-list-item
         class="character-card"
         *ngFor="let character of characterList; let i = index"
-        (click)="getDetails(character.id)"
+        [routerLink]="character.id.toString()"
       >
         <div fxLayout="column" class="character-image">
           <img [src]="imageList[i]" class="image" />
@@ -62,7 +62,7 @@
         (click)="selectPage(1)"
         fxShow
         fxHide.lt-sm
-      >
+      > 
         <<
       </button>
       <button

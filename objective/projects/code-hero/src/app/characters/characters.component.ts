@@ -21,19 +21,17 @@ export class CharactersComponent implements OnInit {
 
   page: Page;
   pages: number[] = [];
+  pageLimit: any;
 
   currentPage: number = 1;
   totalPages: number = 1;
   range: any;
-
-  pageLimit: any;
 
   showList: boolean = true;
 
   constructor(
     private characterService: CharacterService,
     private imageService: ImageService,
-    private router: Router
   ) {
     this.characterName = new FormControl();
     this.page = {
@@ -54,15 +52,6 @@ export class CharactersComponent implements OnInit {
     });
   }
 
-  getDetails(characterId: number) {
-    this.router.navigate(['herois/' + characterId])
-  }
-
-  selectPage(page: number) {
-    this.page.offset = (page * this.page.limit) - 10;
-    this.getCharacters();
-  }
-
   filterCharacters() {
     this.characterName.valueChanges
       .pipe(
@@ -75,23 +64,22 @@ export class CharactersComponent implements OnInit {
         this.getCharacters();
       })
   }
-
   processResults(res: CharacterResponse) {
     this.characterList = res.data.results;
-    this.characterList.forEach(character => {
+    this.characterList.forEach(async character => {
       this.imageList = new Array<any>()
-      this.getImage(`${character.thumbnail.path}/standard_small.${character.thumbnail.extension}`)
+      await this.getImage(`${character.thumbnail.path}/standard_small.${character.thumbnail.extension}`)
     })
   }
 
-  getImage(imageUrl: string) {
-    this.imageService.getImage(imageUrl).subscribe((baseImage: any) => {
+  // Image methods
+  async getImage(imageUrl: string) {
+    await this.imageService.getImage(imageUrl).subscribe((baseImage: any) => {
       this.createImageFromBlob(baseImage)
       // let objectURL = 'data:image/jpg;base64,' + baseImage.image;
       // this.imageList.push(this.sanitizer.bypassSecurityTrustUrl(result));
     });
   }
-
   createImageFromBlob(image: Blob) {
     let reader = new FileReader();
     reader.addEventListener("load", () => {
@@ -103,6 +91,11 @@ export class CharactersComponent implements OnInit {
     }
   }
 
+  // Pagination methods
+  selectPage(page: number) {
+    this.page.offset = (page * this.page.limit) - 10;
+    this.getCharacters();
+  }
   getPages(offset: number, limit: number, size: number) {
     this.currentPage = this.getCurrentPage(offset, limit);
     this.totalPages = this.getTotalPages(limit, size);
@@ -110,13 +103,10 @@ export class CharactersComponent implements OnInit {
     range(this.currentPage - 2, 5).subscribe(page => {
       this.pages.push(page)
     })
-
   }
-
   getCurrentPage(offset: number, limit: number): number {
     return Math.floor(offset / limit) + 1;
   }
-
   getTotalPages(limit: number, total: number): number {
     return Math.ceil(Math.max(total, 1) / Math.max(limit, 1));
   }

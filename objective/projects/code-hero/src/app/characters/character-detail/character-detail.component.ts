@@ -19,8 +19,10 @@ export class CharacterDetailComponent implements OnInit {
 
   comics: Detail[] = [];
   comicsImageList: any[] = [];
+
   series: Detail[] = [];
   seriesImageList: any[] = [];
+
   events: Detail[] = [];
   eventsImageList: any[] = [];
 
@@ -42,10 +44,10 @@ export class CharacterDetailComponent implements OnInit {
 
     if (this.characterId) {
       this.isLoading = true;
-      this.characterService.getCharacterByid(this.characterId).subscribe((res: CharacterResponse) => {
+      this.characterService.getCharacters(null, this.characterId).subscribe((res: CharacterResponse) => {
         if (res.data) {
           this.character = res.data.results[0];
-          this.getMainImage(`${this.character.thumbnail.path}/portrait_xlarge.${this.character.thumbnail.extension}`)
+          this.getImage(`${this.character.thumbnail.path}/portrait_xlarge.${this.character.thumbnail.extension}`)
           this.getDetailsByContext();
           this.isLoading = false
         }
@@ -54,59 +56,40 @@ export class CharacterDetailComponent implements OnInit {
   }
 
   getDetailsByContext() {
+    this.comicsImageList, this.seriesImageList, this.eventsImageList = new Array<any>();
+
     this.characterService.getDetailsByCharacterIdAndContext(this.characterId, 'comics').subscribe((res: DetailResponse) => {
       this.comics = res.data.results;
-      this.comicsImageList = new Array<any>()
-      this.comics.forEach(comic => {
-        this.getImage(`${comic.thumbnail.path}/standard_small.${comic.thumbnail.extension}`, this.comicsImageList)
+      this.comics.forEach(async comic => {
+        await this.getImage(`${comic.thumbnail.path}/standard_small.${comic.thumbnail.extension}`, this.comicsImageList)
       })
     });
 
     this.characterService.getDetailsByCharacterIdAndContext(this.characterId, 'series').subscribe((res: DetailResponse) => {
       this.series = res.data.results;
-      this.seriesImageList = new Array<any>()
-      this.series.forEach(serie => {
-        this.getImage(`${serie.thumbnail.path}/standard_small.${serie.thumbnail.extension}`, this.seriesImageList)
+      this.series.forEach(async serie => {
+        await this.getImage(`${serie.thumbnail.path}/standard_small.${serie.thumbnail.extension}`, this.seriesImageList)
       })
     });
+
     this.characterService.getDetailsByCharacterIdAndContext(this.characterId, 'events').subscribe((res: DetailResponse) => {
       this.events = res.data.results;
-      this.eventsImageList = new Array<any>()
-      this.events.forEach(event => {
-        this.getImage(`${event.thumbnail.path}/standard_small.${event.thumbnail.extension}`, this.eventsImageList)
+      this.events.forEach(async event => {
+        await this.getImage(`${event.thumbnail.path}/standard_small.${event.thumbnail.extension}`, this.eventsImageList)
       })
     });
   }
 
-
-
-  getMainImage(imageUrl: string) {
-    this.imageService.getImage(imageUrl).subscribe((baseImage: any) => {
-      this.createMainImageFromBlob(baseImage);
-    });
-  }
-
-  createMainImageFromBlob(image: Blob) {
-    let reader = new FileReader();
-    reader.addEventListener("load", () => {
-      this.characterImage = reader.result
-    }, false);
-
-    if (image) {
-      reader.readAsDataURL(image);
-    }
-  }
-
-  getImage(imageUrl: string, imageArray: Array<any>) {
-    this.imageService.getImage(imageUrl).subscribe((baseImage: any) => {
+  async getImage(imageUrl: string, imageArray?: Array<any>) {
+    await this.imageService.getImage(imageUrl).subscribe((baseImage: any) => {
       this.createImageFromBlob(baseImage, imageArray);
     });
   }
 
-  createImageFromBlob(image: Blob, imageArray: Array<any>) {
+  createImageFromBlob(image: Blob, imageArray?: Array<any>) {
     let reader = new FileReader();
     reader.addEventListener("load", () => {
-      imageArray.push(reader.result);
+      imageArray ? imageArray.push(reader.result) : this.characterImage = reader.result
     }, false);
 
     if (image) {

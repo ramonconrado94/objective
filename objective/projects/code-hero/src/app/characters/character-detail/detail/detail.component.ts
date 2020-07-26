@@ -6,14 +6,9 @@ import { Detail } from 'projects/code-hero/models/details';
   templateUrl: './detail.component.html',
   styleUrls: ['./detail.component.scss']
 })
-export class DetailComponent implements OnInit {
+export class DetailComponent {
   @Input('detailList')
   detailList: Array<Detail> = [];
   @Input('imageList')
   imageList: Array<any> = [];
-  constructor(
-  ) {
-  }
-  ngOnInit(): void {
-  }
 }
