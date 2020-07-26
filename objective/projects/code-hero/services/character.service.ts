@@ -30,8 +30,8 @@ export class CharacterService {
           apikey: this.public_key,
           ts: timestamp,
           hash: hash,
-          offset: page.offset,
-          limit: page.limit,
+          offset: page.offset.toString(),
+          limit: page.limit.toString()
         }
       })
     };
