@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { CharacterService } from 'projects/code-hero/services/character.service';
-import { Character } from 'projects/code-hero/models/character';
 import { Page } from 'projects/code-hero/models/page';
 import { FormControl } from '@angular/forms';
-import { MarvelResponse } from 'projects/code-hero/models/marvel-response';
+import { CharacterResponse, Character } from 'projects/code-hero/models/character';
 import { ImageService } from 'projects/code-hero/services/image.service';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { range } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'code-hero-characters',
@@ -28,9 +28,12 @@ export class CharactersComponent implements OnInit {
 
   pageLimit: any;
 
+  showList: boolean = true;
+
   constructor(
     private characterService: CharacterService,
     private imageService: ImageService,
+    private router: Router
   ) {
     this.characterName = new FormControl();
     this.page = {
@@ -40,19 +43,22 @@ export class CharactersComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    // this.getCharacters();
-    // this.filterCharacters();
-    
+    this.getCharacters();
+    this.filterCharacters();
   }
 
   getCharacters() {
-    this.characterService.getCharacters(this.page).subscribe((res: MarvelResponse) => {
+    this.characterService.getCharacters(this.page).subscribe((res: CharacterResponse) => {
       this.processResults(res);
       this.getPages(res.data.offset, res.data.limit, res.data.total)
     });
   }
 
-  selectPage(page: number) { 
+  getDetails(characterId: number) {
+    this.router.navigate(['herois/' + characterId])
+  }
+
+  selectPage(page: number) {
     this.page.offset = (page * this.page.limit) - 10;
     this.getCharacters();
   }
@@ -63,18 +69,19 @@ export class CharactersComponent implements OnInit {
         debounceTime(300),
         distinctUntilChanged()
       ).subscribe(name => {
+        this.showList = true;
         this.page.argument = name;
         this.page.offset = 0;
         this.getCharacters();
       })
   }
 
-  processResults(res: MarvelResponse) {
+  processResults(res: CharacterResponse) {
     this.characterList = res.data.results;
-    // this.characterList.forEach(character => {
-    //   this.imageList = new Array<any>()
-    //   this.getImage(`${character.thumbnail.path}/standard_small.${character.thumbnail.extension}`)
-    // })
+    this.characterList.forEach(character => {
+      this.imageList = new Array<any>()
+      this.getImage(`${character.thumbnail.path}/standard_small.${character.thumbnail.extension}`)
+    })
   }
 
   getImage(imageUrl: string) {
@@ -98,12 +105,12 @@ export class CharactersComponent implements OnInit {
 
   getPages(offset: number, limit: number, size: number) {
     this.currentPage = this.getCurrentPage(offset, limit);
-    this.totalPages = this.getTotalPages(limit, size); 
+    this.totalPages = this.getTotalPages(limit, size);
     this.pages = [];
     range(this.currentPage - 2, 5).subscribe(page => {
       this.pages.push(page)
     })
- 
+
   }
 
   getCurrentPage(offset: number, limit: number): number {
@@ -112,5 +119,5 @@ export class CharactersComponent implements OnInit {
 
   getTotalPages(limit: number, total: number): number {
     return Math.ceil(Math.max(total, 1) / Math.max(limit, 1));
-  } 
+  }
 }
