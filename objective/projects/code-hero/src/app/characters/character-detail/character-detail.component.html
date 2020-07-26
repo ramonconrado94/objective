@@ -1,0 +1,59 @@
+<div id="character-detail">
+  <div *ngIf="isLoading" fxLayoutAlign="center" class="loading">
+    <mat-spinner color="accent"></mat-spinner>
+  </div>
+
+  <div *ngIf="character && !isLoading">
+    <!-- High resolution view -->
+    <div class="main-info" fxLayout="row" fxShow fxHide.lt-sm>
+      <div fxLayout="column" class="image">
+        <img [src]="characterImage" />
+        <span routerLink="/">
+          VOLTAR
+        </span>
+      </div>
+      <div fxLayout="column">
+        <span class="character-name">
+          {{ character.name }}
+        </span>
+        <span class="character-desc">{{ character.description }}</span>
+      </div>
+    </div>
+
+    <!-- Mobile view -->
+    <div class="main-info" fxHide fxShow.lt-sm>
+      <p class="character-name" fxLayoutAlign="center">
+        {{ character.name }}
+      </p>
+      <div class="image">
+        <img [src]="characterImage" fxLayoutAlign="center" />
+        <span routerLink="/">
+          VOLTAR
+        </span>
+      </div>
+      <br />
+      <span class="character-desc">{{ character.description }}</span>
+    </div>
+
+    <mat-tab-group mat-align-tabs="start" color="accent">
+      <mat-tab label="Quadrinhos">
+        <code-hero-detail
+          [detailList]="comics"
+          [imageList]="comicsImageList"
+        ></code-hero-detail>
+      </mat-tab>
+      <mat-tab label="Séries">
+        <code-hero-detail
+          [detailList]="series"
+          [imageList]="seriesImageList"
+        ></code-hero-detail>
+      </mat-tab>
+      <mat-tab label="Eventos">
+        <code-hero-detail
+          [detailList]="events"
+          [imageList]="eventsImageList"
+        ></code-hero-detail>
+      </mat-tab>
+    </mat-tab-group>
+  </div>
+</div>
