@@ -6,7 +6,6 @@ import { CharacterResponse, Character } from 'projects/code-hero/models/characte
 import { ImageService } from 'projects/code-hero/services/image.service';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { range } from 'rxjs';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'code-hero-characters',
@@ -14,20 +13,15 @@ import { Router } from '@angular/router';
   styleUrls: ['./characters.component.scss']
 })
 export class CharactersComponent implements OnInit {
-  characterList: Character[] = []
   characterName: FormControl;
+  characterList: Character[] = []
   imageList: any[] = []
   image: any;
 
   page: Page;
   pages: number[] = [];
-  pageLimit: any;
-
   currentPage: number = 1;
   totalPages: number = 1;
-  range: any;
-
-  showList: boolean = true;
 
   constructor(
     private characterService: CharacterService,
@@ -41,14 +35,24 @@ export class CharactersComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    let page = sessionStorage.getItem('page');
+    if (page) {
+      this.page = JSON.parse(page);
+      this.characterName.setValue(this.page.argument)
+    }
     this.getCharacters();
     this.filterCharacters();
+  };
+
+  ngOnDestroy(): void {
+    sessionStorage.setItem('page', JSON.stringify(this.page));
   }
 
   getCharacters() {
     this.characterService.getCharacters(this.page).subscribe((res: CharacterResponse) => {
-      this.processResults(res);
       this.getPages(res.data.offset, res.data.limit, res.data.total)
+      this.characterList = res.data.results;
+      this.getImageList();
     });
   }
 
@@ -58,28 +62,25 @@ export class CharactersComponent implements OnInit {
         debounceTime(300),
         distinctUntilChanged()
       ).subscribe(name => {
-        this.showList = true;
         this.page.argument = name;
         this.page.offset = 0;
         this.getCharacters();
       })
   }
-  processResults(res: CharacterResponse) {
-    this.characterList = res.data.results;
-    this.characterList.forEach(async character => {
-      this.imageList = new Array<any>()
-      await this.getImage(`${character.thumbnail.path}/standard_small.${character.thumbnail.extension}`)
-    })
-  }
 
   // Image methods
-  async getImage(imageUrl: string) {
-    await this.imageService.getImage(imageUrl).subscribe((baseImage: any) => {
-      this.createImageFromBlob(baseImage)
-      // let objectURL = 'data:image/jpg;base64,' + baseImage.image;
-      // this.imageList.push(this.sanitizer.bypassSecurityTrustUrl(result));
+  async getImageList() {
+    this.imageList = new Array<any>()
+    this.characterList.forEach(async character => {
+      let imagePath = `${character.thumbnail.path}/standard_small.${character.thumbnail.extension}`;
+      await this.imageService.getImage(imagePath).then((baseImage: any) => {
+        // let objectURL = 'data:image/jpg;base64,' + baseImage.image;
+        // this.imageList.push(this.sanitizer.bypassSecurityTrustUrl(result));
+        this.createImageFromBlob(baseImage)
+      })
     });
   }
+
   createImageFromBlob(image: Blob) {
     let reader = new FileReader();
     reader.addEventListener("load", () => {
