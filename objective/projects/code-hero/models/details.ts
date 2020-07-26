@@ -1,17 +1,17 @@
-export interface CharacterResponse {
+export interface DetailResponse {
   code: number,
   etag: string,
   data: {
     count: number,
     limit: number,
     offset: number,
-    results: Character[],
+    results: Detail[],
     total: number
   }
 }
-export interface Character {
+export interface Detail {
   id: number,
-  name: string,
+  title: string,
   description: string,
   thumbnail: any,
 }
