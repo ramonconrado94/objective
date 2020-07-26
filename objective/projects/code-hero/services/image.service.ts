@@ -7,7 +7,7 @@ export class ImageService {
 
   constructor(private httpClient: HttpClient) { }
 
-  getImage(imageUrl: string): any {
+  getImage(imageUrl: any): any {
     return this.httpClient.get(imageUrl, { responseType: 'blob' as 'json' });
   }
 }
