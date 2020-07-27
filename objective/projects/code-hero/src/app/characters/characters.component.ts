@@ -69,29 +69,17 @@ export class CharactersComponent implements OnInit {
       })
   }
 
-  // Image methods
   async getImageList() {
     this.imageList = new Array<any>()
     this.characterList.forEach(async character => {
       let imagePath = `${character.thumbnail.path}/standard_small.${character.thumbnail.extension}`;
       await this.imageService.getImage(imagePath).then((baseImage: any) => {
-        this.imageList.push(this.sanitizer.bypassSecurityTrustUrl(URL.createObjectURL(baseImage)))
+        let trustUrl = this.sanitizer.bypassSecurityTrustUrl(URL.createObjectURL(baseImage));
+        this.imageList.push(trustUrl);
       })
     });
   }
 
-  createImageFromBlob(image: any) {
-    let reader = new FileReader();
-    reader.addEventListener("load", () => {
-      this.imageList.push(reader.result);
-    }, false);
-
-    if (image) {
-      reader.readAsDataURL(image);
-    }
-  }
-
-  // Pagination methods
   selectPage(page: number) {
     this.page.offset = (page * this.page.limit) - 10;
     this.getCharacters();

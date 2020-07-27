@@ -6,6 +6,7 @@ import { ImageService } from 'projects/code-hero/services/image.service';
 import { CharacterService } from 'projects/code-hero/services/character.service';
 import { DetailResponse, Detail } from 'projects/code-hero/models/details';
 import { Thumbnail } from 'projects/code-hero/models/thumbnail';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'code-hero-character-detail',
@@ -27,8 +28,9 @@ export class CharacterDetailComponent implements OnInit {
   eventsImageList: any[] = [];
 
   constructor(
-    private characterService: CharacterService,
     private imageService: ImageService,
+    private characterService: CharacterService,
+    private sanitizer: DomSanitizer,
     private route: ActivatedRoute
   ) {
   }
@@ -78,21 +80,11 @@ export class CharacterDetailComponent implements OnInit {
     });
   }
 
-  // Image methods
   async getImage(thumbnail: Thumbnail, size: string, imageArray?: Array<any>) {
     let imagePath = `${thumbnail.path}/${size}.${thumbnail.extension}`;
     await this.imageService.getImage(imagePath).then((baseImage: any) => {
-      this.createImageFromBlob(baseImage, imageArray);
+      let trustUrl = this.sanitizer.bypassSecurityTrustUrl(URL.createObjectURL(baseImage));
+      imageArray ? imageArray.push(trustUrl) : this.characterImage = trustUrl;
     });
-  }
-  createImageFromBlob(image: Blob, imageArray?: Array<any>) {
-    let reader = new FileReader();
-    reader.addEventListener("load", () => {
-      imageArray ? imageArray.push(reader.result) : this.characterImage = reader.result;
-    }, false);
-
-    if (image) {
-      reader.readAsDataURL(image);
-    }
   }
 }
