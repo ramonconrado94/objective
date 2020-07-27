@@ -26,7 +26,11 @@
             "assets": [
               "projects/code-hero/src/favicon.ico",
               "projects/code-hero/src/assets",
-              "projects/code-hero/src/_redirect"
+              {
+                "glob": "_redirects",
+                "input": "src",
+                "output": "/"
+              }
             ],
             "styles": [
               "projects/code-hero/src/styles.scss"
