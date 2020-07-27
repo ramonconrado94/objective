@@ -1,14 +1,16 @@
-<mat-list id="detail-component" *ngIf="detailList.length">
-  <mat-list-item *ngFor="let detail of detailList; let i = index">
-    <div fxLayout="column" class="character-image">
-      <img [src]="imageList[i]" />
-    </div>
-    <div>
-      {{ detail.title }}
-    </div>
-  </mat-list-item>
-</mat-list>
+<div id="detail-component">
+  <div *ngIf="!detailList" fxLayoutAlign="center" class="loading">
+    <mat-spinner color="accent"></mat-spinner>
+  </div>
 
-<div *ngIf="!detailList.length" fxLayoutAlign="center">
-  <mat-spinner color="accent"></mat-spinner>
+  <mat-list *ngIf="detailList">
+    <mat-list-item *ngFor="let detail of detailList; let i = index">
+      <div fxLayout="column">
+        <img [src]="imageList[i]" />
+      </div>
+      <div class="title">
+        {{ detail.title }}
+      </div>
+    </mat-list-item>
+  </mat-list>
 </div>

@@ -1,3 +1,5 @@
+import { Thumbnail } from './thumbnail';
+
 export interface DetailResponse {
   code: number,
   etag: string,
@@ -13,5 +15,5 @@ export interface Detail {
   id: number,
   title: string,
   description: string,
-  thumbnail: any,
+  thumbnail: Thumbnail,
 }

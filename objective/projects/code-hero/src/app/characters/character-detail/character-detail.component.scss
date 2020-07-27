@@ -2,14 +2,36 @@
 #character-detail {
   padding-left: 10%;
   padding-right: 10%;
-  padding-top: 2%;
+  padding-top: 10vh;
   background: #e5e5e5 0% 0% no-repeat padding-box;
 
   .loading {
     margin-top: 30vh;
   }
+
   .main-info {
     margin: 16px 0 16px;
+    .image {
+      text-align: center;
+      max-height: 250px;
+      max-width: 150px;
+      border-radius: 10px;
+      border: 3px solid orange;
+      background: orange;
+
+      img {
+        border-radius: 5px;
+      }
+      @media (max-width: 600px) {
+        margin: auto;
+      }
+      span {
+        font: Bold 18px/16px PT Sans Caption;
+        cursor: pointer;
+        padding: 4px;
+        color: white;
+      }
+    }
     .character-name {
       font: Bold 32px/30px PT Sans Caption;
       height: 60px;
@@ -19,35 +41,5 @@
       font-size: 16px;
       padding: 8px;
     }
-  }
-
-  .image {
-    @media (max-width: 600px) {
-      margin: auto;
-    }
-    
-    text-align: center;
-    max-height: 250px;
-    max-width: 150px;
-    img {
-      border-radius: 5px;
-    }
-    border-radius: 10px;
-    border: 3px solid orange;
-    background: orange;
-    span {
-      font: Bold 18px/16px PT Sans Caption;
-      cursor: pointer;
-      padding: 4px;
-      color: white;
-    }
-  }
-  .search-text {
-    text-align: left;
-    height: 36px;
-    font: Bold 32px/30px PT Sans Caption;
-    letter-spacing: 0px;
-    color: #555555;
-    opacity: 1;
   }
 }

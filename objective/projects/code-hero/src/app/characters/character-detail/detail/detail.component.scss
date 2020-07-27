@@ -1,5 +1,5 @@
-#detail-component{
-  mat-list-item{
+#detail-component {
+  mat-list-item {
     background: white;
     height: 60px;
     border: 1px solid lightgrey;
@@ -8,5 +8,20 @@
     margin-left: 20px;
     width: 85%;
     margin-bottom: 8px;
+  }
+  .loading {
+    margin-top: 15vh;
+  }
+  img {
+    border-radius: 5px;
+  }
+  .title {
+    margin: 8px 0 0 4px;
+    text-align: left;
+    font: Bold 16px/22px PT Sans;
+    white-space: normal;
+    color: #555555;
+    height: 60px;
+    overflow: auto;
   }
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Detail } from 'projects/code-hero/models/details';
 
 @Component({

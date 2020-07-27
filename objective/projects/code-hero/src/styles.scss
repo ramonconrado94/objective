@@ -43,7 +43,11 @@ body {
 body {
   margin: 0;
   background: #e5e5e5;
-  font-family: 'PT Sans', sans-serif;
+  font-family: PT Sans, sans-serif;
+}
+
+.mat-tab-label, span, p {
+  font-family: PT Sans, sans-serif !important;
 }
 
 * ::-webkit-scrollbar {
