@@ -1,4 +1,6 @@
 <div id="characters">
+  <mat-progress-bar mode="indeterminate" *ngIf="isLoading" color="accent"></mat-progress-bar>
+
   <div class="search-box">
     <span class="search-title">
       Busca de personagens
@@ -36,7 +38,11 @@
         [routerLink]="character.id.toString()"
       >
         <div fxLayout="column" class="character-image">
-          <img [src]="imageList[i]" alt="assets/image/marvel.png" class="image" />
+          <img
+            [src]="imageList[i]"
+            alt="assets/image/marvel.png"
+            class="image"
+          />
         </div>
         <div fxLayout="column" class="character-name">
           <p>{{ character.name }}</p>

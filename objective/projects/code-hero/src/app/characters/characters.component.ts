@@ -22,6 +22,7 @@ export class CharactersComponent implements OnInit {
   pages: number[] = [];
   currentPage: number = 1;
   totalPages: number = 1;
+  isLoading: boolean = false;
 
   constructor(
     private characterService: CharacterService,
@@ -50,10 +51,12 @@ export class CharactersComponent implements OnInit {
   }
 
   getCharacters() {
+    this.isLoading = true;
     this.characterService.getCharacters(this.page).subscribe((res: CharacterResponse) => {
       this.getPages(res.data.offset, res.data.limit, res.data.total)
       this.characterList = res.data.results;
       this.getImageList();
+      this.isLoading = false;
     });
   }
 
