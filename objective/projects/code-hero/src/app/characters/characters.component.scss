@@ -28,16 +28,18 @@
     .search-field {
       top: 183px;
       left: 113px;
-      width: 276px;
-      max-width: 276px;
+      width: 225px;
+      max-width: 225px;
       height: 32px;
       background: #ffffff 0% 0% no-repeat padding-box;
       border: 1px solid #e5e5e5;
       border-radius: 4px;
     }
-    input#characterName {
+    input#characterName { 
       padding-left: 16px;
       display: flex;
+      background-image: url('/assets/icon/search.png');
+      background-position: right center;
     }
   }
   .character-list {

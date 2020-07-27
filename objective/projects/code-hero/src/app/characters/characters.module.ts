@@ -10,6 +10,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatIconModule } from '@angular/material/icon';
 import { SharedModule } from './../shared/shared.module';
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { SharedModule } from './../shared/shared.module';
     MatButtonModule,
     MatTabsModule,
     MatProgressSpinnerModule,
-    MatProgressBarModule
+    MatProgressBarModule,
+    MatIconModule,
   ],
   providers: [
     CharacterService,

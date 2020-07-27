@@ -1,5 +1,9 @@
 <div id="characters">
-  <mat-progress-bar mode="indeterminate" *ngIf="isLoading" color="accent"></mat-progress-bar>
+  <mat-progress-bar
+    mode="indeterminate"
+    *ngIf="isLoading"
+    color="accent"
+  ></mat-progress-bar>
 
   <div class="search-box">
     <span class="search-title">
@@ -10,7 +14,6 @@
         Nome do personagem
       </span>
       <input
-        matInput
         [formControl]="characterName"
         id="characterName"
         class="search-field"
