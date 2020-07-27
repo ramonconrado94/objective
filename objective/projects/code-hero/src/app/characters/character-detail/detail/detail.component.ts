@@ -1,5 +1,4 @@
 import { Component, Input } from '@angular/core';
-import { Detail } from 'projects/code-hero/models/details';
 
 @Component({
   selector: 'code-hero-detail',
@@ -8,7 +7,9 @@ import { Detail } from 'projects/code-hero/models/details';
 })
 export class DetailComponent {
   @Input('detailList')
-  detailList: Array<Detail> = [];
+  detailList: any;
   @Input('imageList')
   imageList: Array<any> = [];
 }
+
+

@@ -15,6 +15,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 })
 export class CharacterDetailComponent implements OnInit {
   isLoading: boolean = true;
+
   character: Character | undefined;
   characterId: string = '';
   characterImage: any;
@@ -60,9 +61,11 @@ export class CharacterDetailComponent implements OnInit {
 
     this.characterService.getDetailsByCharacterIdAndContext(this.characterId, 'comics').subscribe((res: DetailResponse) => {
       this.comics = res.data.results;
-      this.comics.forEach(async comic => {
-        await this.getImage(comic.thumbnail, 'standard_small', this.comicsImageList)
-      })
+      if (this.comics.length) {
+        this.comics.forEach(async comic => {
+          await this.getImage(comic.thumbnail, 'standard_small', this.comicsImageList)
+        })
+      }
     });
 
     this.characterService.getDetailsByCharacterIdAndContext(this.characterId, 'series').subscribe((res: DetailResponse) => {

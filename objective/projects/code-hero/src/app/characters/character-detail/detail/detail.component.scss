@@ -9,9 +9,6 @@
     width: 85%;
     margin-bottom: 8px;
   }
-  .loading {
-    margin-top: 15vh;
-  }
   img {
     border-radius: 5px;
   }
@@ -23,5 +20,8 @@
     color: #555555;
     height: 60px;
     overflow: auto;
+  }
+  .loading {
+    margin-top: 15vh;
   }
 }

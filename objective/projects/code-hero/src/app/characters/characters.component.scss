@@ -29,6 +29,7 @@
       top: 183px;
       left: 113px;
       width: 276px;
+      max-width: 276px;
       height: 32px;
       background: #ffffff 0% 0% no-repeat padding-box;
       border: 1px solid #e5e5e5;
@@ -36,6 +37,7 @@
     }
     input#characterName {
       padding-left: 16px;
+      display: flex;
     }
   }
   .character-list {
