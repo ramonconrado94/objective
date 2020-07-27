@@ -42,8 +42,8 @@ export class CharactersComponent implements OnInit {
       this.page = JSON.parse(page);
       this.characterName.setValue(this.page.argument)
     }
-    // this.getCharacters();
-    // this.filterCharacters();
+    this.getCharacters();
+    this.filterCharacters();
   };
 
   ngOnDestroy(): void {
