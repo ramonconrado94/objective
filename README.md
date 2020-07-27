@@ -1,6 +1,7 @@
 # Objective - Code Hero
 
 A responsive single page application, designed to search marvel characters and view their details. 
+
 Features:
   * Pagination
   * Filter by name
