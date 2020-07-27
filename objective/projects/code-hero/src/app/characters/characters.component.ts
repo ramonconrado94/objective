@@ -6,6 +6,7 @@ import { CharacterResponse, Character } from 'projects/code-hero/models/characte
 import { ImageService } from 'projects/code-hero/services/image.service';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { range } from 'rxjs';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'code-hero-characters',
@@ -16,7 +17,6 @@ export class CharactersComponent implements OnInit {
   characterName: FormControl;
   characterList: Character[] = []
   imageList: any[] = []
-  image: any;
 
   page: Page;
   pages: number[] = [];
@@ -26,6 +26,7 @@ export class CharactersComponent implements OnInit {
   constructor(
     private characterService: CharacterService,
     private imageService: ImageService,
+    private sanitizer: DomSanitizer
   ) {
     this.characterName = new FormControl();
     this.page = {
@@ -74,14 +75,12 @@ export class CharactersComponent implements OnInit {
     this.characterList.forEach(async character => {
       let imagePath = `${character.thumbnail.path}/standard_small.${character.thumbnail.extension}`;
       await this.imageService.getImage(imagePath).then((baseImage: any) => {
-        // let objectURL = 'data:image/jpg;base64,' + baseImage.image;
-        // this.imageList.push(this.sanitizer.bypassSecurityTrustUrl(result));
-        this.createImageFromBlob(baseImage)
+        this.imageList.push(this.sanitizer.bypassSecurityTrustUrl(URL.createObjectURL(baseImage)))
       })
     });
   }
 
-  createImageFromBlob(image: Blob) {
+  createImageFromBlob(image: any) {
     let reader = new FileReader();
     reader.addEventListener("load", () => {
       this.imageList.push(reader.result);
