@@ -6,15 +6,16 @@ import { CharacterResponse } from '../models/character';
 import { Page } from '../models/page';
 import { md5 } from './../utils/md5';
 import { DetailResponse } from '../models/details';
+import { environment } from '../src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CharacterService {
 
-  private marvel_api = 'https://gateway.marvel.com/v1/public/characters';
-  private public_key = '3aaebdb08ed73d4e83226af834abf703';
-  private private_key = 'da3f077c1f49fbeef225ca6bef92b3dd18335499';
+  marvel_api = environment.marvel_api;
+  public_key = environment.public_key;
+  private_key = environment.private_key;
 
   constructor(
     private httpClient: HttpClient,
@@ -45,7 +46,7 @@ export class CharacterService {
         retry(2),
         catchError(this.handleError))
   }
-  
+
   getDetailsByCharacterIdAndContext(id: string, context: string): Observable<DetailResponse> {
     console.log("CharacterService -> context", context)
     console.log("CharacterService -> id", id)
