@@ -8,7 +8,8 @@ Features:
 
 ## How to run
 
-Go to the objective folder through a terminal or prompt, run 'npm install' after complete, run 'ng serve -o' or 'npm start' That flag (-o) will open your browser automatically.
+Go to the objective folder through a terminal or prompt, run 'npm install' after complete, run 'ng serve -o' or 'npm start' That flag (-o) will open your browser automatically. 
+Now it's just navigate throuth your browser to localhost:4200
  
 ## Try in cloud
 
