@@ -1,11 +1,10 @@
 # Objective - Code Hero
 
 A responsive single page application, designed to search marvel characters and view their details. 
+
 Features:
   * Pagination
   * Filter by name
-
-Generated with [Angular CLI] version 10.0.4.
 
 ## How to run
 
@@ -14,4 +13,8 @@ Go to the objective folder through a terminal or prompt, run 'npm install' after
 ## Try in cloud
 
 You can access the demo in https://objective-hero.netlify.app
+
+## Info
+
+Developed in angular 10
 
