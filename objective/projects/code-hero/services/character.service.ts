@@ -22,7 +22,6 @@ export class CharacterService {
   ) { }
 
   getCharacters(page?: Page | null, id?: string): Observable<CharacterResponse> {
-    console.log("CharacterService -> page", page)
     const timestamp = new Date().getTime().toString();
     const hash = md5(timestamp + this.private_key + this.public_key)
     const options = {
@@ -48,8 +47,6 @@ export class CharacterService {
   }
 
   getDetailsByCharacterIdAndContext(id: string, context: string): Observable<DetailResponse> {
-    console.log("CharacterService -> context", context)
-    console.log("CharacterService -> id", id)
     const timestamp = new Date().getTime().toString();
     const hash = md5(timestamp + this.private_key + this.public_key)
     const options = {
